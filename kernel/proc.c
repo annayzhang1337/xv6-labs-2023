@@ -274,6 +274,15 @@ growproc(int n)
   return 0;
 }
 
+// Create a trace function blah
+int trace(int trace_num) {
+  struct proc *p = myproc();
+  acquire(&p->lock);
+  p->trace = trace_num;
+  release(&p->lock);
+  return 0;
+}
+
 // Create a new process, copying the parent.
 // Sets up child kernel stack to return as if from fork() system call.
 int
@@ -295,6 +304,9 @@ fork(void)
     return -1;
   }
   np->sz = p->sz;
+
+  // copy trace mask to child
+  np->trace = p->trace;
 
   // copy saved user registers.
   *(np->trapframe) = *(p->trapframe);

@@ -22,6 +22,22 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+int trace(int);
+
+/**
+ * trace(bit array)
+ * 
+ */
+
+/**
+ * var = 32 = 101000
+ * 
+ * user want to do syscall 8
+ * mask = 1 << sysnum (8)
+ * bool = vsr & mask
+ * FORK_MASK = 00100 = 4
+ * bool = var & FORK_MASK = 00100 -> true
+ */
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -39,3 +55,4 @@ void free(void*);
 int atoi(const char*);
 int memcmp(const void *, const void *, uint);
 void *memcpy(void *, const void *, uint);
+
